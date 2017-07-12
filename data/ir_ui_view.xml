@@ -21,11 +21,11 @@
           </xpath>
           <!--ELEMENT 1.4-->
           <xpath expr="//div[@name='button_box']" position="inside">
-              <button name="%(action_pre_sales_hold)d" type="action" class="oe_stat_button" icon="fa-hand-paper-o">
+              <button attrs="{'invisible': [('state', 'not in', ('sale'))]}" name="%(action_pre_sales_hold)d" type="action" class="oe_stat_button" icon="fa-hand-paper-o">
                   <strong>Sales Hold</strong>
                   <field string="Sales Hold" name="x_hold" invisible="1"/>
               </button>
-              <button name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
+              <button attrs="{'invisible': [('state', 'not in', ('sale'))]}" name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
                   <strong>Accounting Hold</strong>
                   <field string="Accounting Hold" name="x_acc_hold" invisible="1" />
               </button>
@@ -86,6 +86,30 @@
               <group>
                 <field name="x_sc_notes"/>
               </group>
+        </xpath>
+        <!--ELEMENT 1.4-->
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="x_dns" invisible="1"/>
+        </xpath>
+        <xpath expr="//div[@name='button_box']" position="after">
+            <div attrs="{'invisible':[('x_dns','!=',True)]}" class="row" style="text-align:center;background-color:red;">
+              <div>
+                <h2 style="color:white;">
+                  <strong>DO NOT SHIP</strong>
+                </h2>
+              </div>
+            </div>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="sp_tree_mod">
+      <field name="name">x_jos.stock.picking.tree.mod</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.vpicktree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="x_dns"/>
         </xpath>
       </field>
       <field name="priority">99</field>
