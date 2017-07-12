@@ -116,6 +116,12 @@
               </div>
             </div>
         </xpath>
+        <!--ELEMENT 2.1-->
+        <xpath expr="//field[@name='location_dest_id']" position="after">
+          <field name="x_incoterm_id"/>
+          <field name="x_freight_booked"/>
+        </xpath>
+
       </field>
       <field name="priority">99</field>
     </record>
@@ -138,6 +144,31 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='payment_term_id']" position="after">
           <field name="x_origin"/>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <!--ELEMENT 2.2-->
+    <record model="ir.ui.view" id="si_form_mod">
+      <field name="name">x_jos.stock.incoterms.form.mod</field>
+      <field name="model">stock.incoterms</field>
+      <field name="inherit_id" ref="stock.stock_incoterms_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='code']" position="after">
+          <field name="x_display_so"/>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="so_incoterm_mod">
+      <field name="name">x_jos.sale.order.form.sale.stock.mod</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='incoterm']" position="attributes">
+          <attribute name="string">Delivery Method</attribute>
+          <attribute name="domain">[('x_display_so','=',True)]</attribute>
+          <attribute name="invisible">0</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>

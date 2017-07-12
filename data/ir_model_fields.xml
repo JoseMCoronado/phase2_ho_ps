@@ -308,5 +308,92 @@
       <field name="translate" eval="False"/>
       <field name="ttype">many2one</field>
     </record>
+    <!-- ELEMENT 2.1-->
+    <record model="ir.model.fields" id="x_freight_booked">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Freight Booked</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="name">x_freight_booked</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">boolean</field>
+    </record>
+    <!-- ELEMENT 2.2-->
+    <record model="ir.model.fields" id="x_display_so">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Display on Sale Order</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.incoterms</field>
+      <field name="model_id" ref="stock.model_stock_incoterms"/>
+      <field name="name">x_display_so</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">boolean</field>
+    </record>
+    <record model="ir.model.fields" id="x_sp_so_incoterms">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+    if record.sale_id:
+        record['x_incoterm_id'] = record.sale_id.incoterm
+    elif record.purchase_id:
+        record['x_incoterm_id'] = record.purchase_id.incoterm_id
+        ]]></field>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Delivery Method</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking" />
+      <field name="name">x_incoterm_id</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation">stock.incoterms</field>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="False"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">many2one</field>
+    </record>
   </data>
 </openerp>
