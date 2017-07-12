@@ -11,5 +11,15 @@
       <field name="act_user_id" ref="base.user_root"/>
       <field name="server_action_ids" eval="[(6, 0, [ref('assign_sc_notes')])]"/>
     </record>
+    <!--ELEMENT 1.6-->
+    <record id="auto_change_state" model="base.action.rule">
+      <field name="name">[JOS] Assign x_state based on state</field>
+      <field name="active" eval="True"/>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="sequence" eval="2"/>
+      <field name="kind">on_write</field>
+      <field name="act_user_id" ref="base.user_root"/>
+      <field name="server_action_ids" eval="[(6, 0, [ref('action_change_state')])]"/>
+    </record>
   </data>
 </openerp>

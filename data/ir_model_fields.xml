@@ -250,5 +250,33 @@
       <field name="translate" eval="False"/>
       <field name="ttype">boolean</field>
     </record>
+    <!--ELEMENT 1.5-->
+    <record model="ir.model.fields" id="x_so_state">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">State</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">sale.order</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order" />
+      <field name="name">x_state</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection">[['draft', 'Quotation'], ['sent', 'Quotation Sent'], ['awaiting', 'Awaiting Approval'], ['sale', 'Sale Order'], ['done', 'Done'], ['cancel', 'Cancelled']]</field>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">selection</field>
+    </record>
   </data>
 </openerp>

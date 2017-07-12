@@ -46,6 +46,22 @@
                 </div>
               </div>
           </xpath>
+          <!--ELEMENT 1.5-->
+          <xpath expr="//field[@name='state']" position="replace">
+             <field name="state" widget="statusbar" invisible="1" statusbar_visible="draft,sent,sale,done"/>
+             <field name="x_state" widget="statusbar" statusbar_visible="draft,sent,awaiting,sale,done"/>
+          </xpath>
+          <!--ELEMENT 1.6-->
+          <xpath expr="//button[@name='action_confirm' and @states='sent']" position="before">
+              <button name="%(action_send_awaiting)d"  attrs="{'invisible': [('x_state', 'not in', ['sent'])]}" string="Confirm for Approval" class="btn-primary o_sale_confirm" type="action"/>
+              <button name="%(action_send_awaiting)d" attrs="{'invisible': [('x_state', 'not in', ['draft'])]}" string="Confirm for Approval" class="o_sale_confirm" type="action"/>
+          </xpath>
+          <xpath expr="//button[@name='action_confirm' and @states='sent']" position="attributes">
+              <attribute name="groups">base.group_sale_manager</attribute>
+          </xpath>
+          <xpath expr="//button[@name='action_confirm' and @states='draft']" position="attributes">
+              <attribute name="groups">base.group_sale_manager</attribute>
+          </xpath>
         </data>
       </field>
       <field name="priority">99</field>
