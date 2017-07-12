@@ -86,5 +86,55 @@ for picking in obj.x_so_id.picking_ids:
       <field name="view_mode">tree,form</field>
       <field name="view_type">form</field>
     </record>
+    <!--ELEMENT 4.2-->
+    <record model="ir.actions.act_window" id="action_downpayment_invoices">
+      <field name="auto_search" eval="True"/>
+      <field name="context">{}</field>
+      <field name="domain">[('type','in',('out_invoice', 'out_refund')),('x_downpayment','=',True)]</field>
+      <field name="filter" eval="False"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="help"><![CDATA[<p>
+                          NONE
+                      </p>
+                  ]]></field>
+      <field name="limit">80</field>
+      <field name="multi" eval="False"/>
+      <field name="name">Open Downpayment Invoices</field>
+      <field name="res_model">account.invoice</field>
+      <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+      <field name="src_model" eval="False"/>
+      <field name="target">current</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="usage" eval="False"/>
+      <field name="view_id" ref="account.invoice_tree"/>
+      <field name="view_ids" eval="[(6, 0, [])]"/>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+    </record>
+    <!--ELEMENT 4.4-->
+    <record model="ir.actions.act_window" id="action_held_sale_orders">
+      <field name="auto_search" eval="True"/>
+      <field name="context">{}</field>
+      <field name="domain">[('state','not in',['done','cancel','draft']),'|',('x_hold','=',True),('x_acc_hold','=',True)]</field>
+      <field name="filter" eval="False"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="help"><![CDATA[<p>
+                          NONE
+                      </p>
+                  ]]></field>
+      <field name="limit">80</field>
+      <field name="multi" eval="False"/>
+      <field name="name">Sale Orders Not Cleared</field>
+      <field name="res_model">sale.order</field>
+      <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+      <field name="src_model" eval="False"/>
+      <field name="target">current</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="usage" eval="False"/>
+      <field name="view_id" ref="sale.view_order_tree"/>
+      <field name="view_ids" eval="[(6, 0, [])]"/>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+    </record>
   </data>
 </openerp>

@@ -395,5 +395,37 @@
       <field name="translate" eval="False"/>
       <field name="ttype">many2one</field>
     </record>
+    <!--ELEMENT 4.2-->
+    <record model="ir.model.fields" id="downpayment_classification">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+    dlines = record.invoice_line_ids.search([('product_id.name','ilike','down payment''),('quantity','&gt;',0)])
+    if dlines:
+        record['x_downpayment'] = True
+        ]]></field>
+      <field name="copy" eval="False"/>
+      <field name="depends">state,number</field>
+      <field name="domain">[]</field>
+      <field name="field_description">Downpayment Invoice</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">account.invoice</field>
+      <field name="model_id" ref="account.model_account_invoice"/>
+      <field name="name">x_downpayment</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">boolean</field>
+    </record>
   </data>
 </openerp>
