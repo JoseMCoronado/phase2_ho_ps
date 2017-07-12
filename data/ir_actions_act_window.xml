@@ -6,7 +6,7 @@
       <field name="child_ids" eval="[(6, 0, [])]"/>
       <field name="code"><![CDATA[obj.x_so_id.write({'x_hold':True,'x_hold_reason': obj.x_hold_reason})
 for picking in obj.x_so_id.picking_ids:
-  picking['x_dns'] = True
+  picking['x_dns'] = True 
         ]]>
       </field>
       <field name="crud_model_id" eval="False"/>
