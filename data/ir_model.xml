@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.model" id="x_hold_reason_wizard">
+      <field name="info"> Wizard to set hold reason.</field>
+      <field name="model">x_hold_reason_wizard</field>
+      <field name="name">Hold Reason</field>
+      <field name="state">manual</field>
+      <field name="transient" eval="True"/>
+    </record>
+  </data>
+</openerp>

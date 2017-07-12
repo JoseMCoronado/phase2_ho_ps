@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!--ELEMENT 1.1-->
+    <record model="ir.ui.view" id="so_note">
+      <field name="name">x_jos.sale.order.form.mod</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <data>
+          <xpath expr="//field[@name='note']" position="attributes">
+            <attribute name="placeholder">Order Note...</attribute>
+          </xpath>
+          <!--ELEMENT 1.2-->
+          <xpath expr="//notebook" position="inside">
+            <page string="Supply Chain Notes">
+                <group>
+                  <field name="x_sc_notes"/>
+                </group>
+            </page>
+          </xpath>
+          <!--ELEMENT 1.4-->
+          <xpath expr="//div[@name='button_box']" position="inside">
+              <button name="%(action_pre_sales_hold)d" type="action" class="oe_stat_button" icon="fa-hand-paper-o">
+                  <strong>Sales Hold</strong>
+                  <field string="Sales Hold" name="x_hold" invisible="1"/>
+              </button>
+              <button name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
+                  <strong>Accounting Hold</strong>
+                  <field string="Accounting Hold" name="x_acc_hold" invisible="1" />
+              </button>
+          </xpath>
+          <xpath expr="//div[@class='oe_title']" position="before">
+              <div attrs="{'invisible':[('x_hold','!=',True),('x_acc_hold','!=',True)]}" class="row" style="text-align:center;background-color:red;">
+                <div>
+                  <h2 style="color:white;">
+                    <strong>ORDER ON HOLD  </strong>
+                    <strong attrs="{'invisible':[('x_hold','!=',True)]}">HELD BY SALES  </strong>
+                    <strong attrs="{'invisible':[('x_acc_hold','!=',True)]}">HELD BY ACCOUNTING</strong>
+                  </h2>
+                </div>
+                <div>
+                  <h4 style="color:white;">
+                  <strong attrs="{'invisible':[('x_hold','!=',True)]}">Sales Hold Reason: <field name="x_hold_reason"/></strong>
+                </h4>
+                </div>
+              </div>
+          </xpath>
+        </data>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="web_note">
+      <field name="name">x_jos.website_quote.pricing.mod</field>
+      <field name="model"></field>
+      <field name="inherit_id" ref="website_quote.pricing"/>
+      <field name="arch" type="xml">
+          <xpath expr="//section[@id='terms']//h2" position="replace">
+            <h2 class="page-header">Order Note</h2>
+          </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <!--ELEMENT 1.2-->
+    <record model="ir.ui.view" id="po_form_mod">
+      <field name="name">x_jos.purchase.order.form.mod</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook" position="inside">
+          <page string="Supply Chain Notes">
+              <group>
+                <field name="x_sc_notes"/>
+              </group>
+          </page>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="sp_form_mod">
+      <field name="name">x_jos.stock.picking.form.mod</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@class='hidden-xs']" position="after">
+              <group>
+                <field name="x_sc_notes"/>
+              </group>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+  </data>
+</openerp>

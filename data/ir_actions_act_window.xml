@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!--ELEMENT 1.4-->
+    <record model="ir.actions.server" id="action_sales_hold">
+      <field name="child_ids" eval="[(6, 0, [])]"/>
+      <field name="code"><![CDATA[obj.x_so_id.write({'x_hold':True,'x_hold_reason': obj.x_hold_reason})
+        ]]>
+      </field>
+      <field name="crud_model_id" eval="False"/>
+      <field name="help" eval="False"/>
+      <field name="link_field_id" eval="False"/>
+      <field name="model_id" ref="phase2_ho_ps.x_hold_reason_wizard"/>
+      <field name="name">[JOS] Hold Sales Order - Sales Hold</field>
+      <field name="sequence">5</field>
+      <field name="state">code</field>
+    </record>
+    <record model="ir.ui.view" id="x_hold_reason_form">
+      <field name="name">x_jos.x_hold_reason.form</field>
+      <field name="model">x_hold_reason_wizard</field>
+      <field name="mode">primary</field>
+      <field name="inherit_id" eval="False"/>
+      <field name="arch" type="xml">
+        <form>
+              <strong><p>Please write reason for holding the order below. Thanks!</p></strong>
+              <group>
+                  <field name="x_hold_reason"/>
+                  <field name="x_so_id" invisible="1"/>
+              </group>
+              <footer>
+                  <button string="Hold" type="action" name="%(action_sales_hold)d" class="oe_highlight"/> or
+                  <button string="Cancel" special="cancel" class="oe_link"/>
+              </footer>
+          </form>
+      </field>
+      <field name="priority">15</field>
+    </record>
+    <record model="ir.actions.act_window" id="hold_reason_wizard">
+      <field name="auto_search" eval="True"/>
+      <field name="context">{}</field>
+      <field name="domain" eval="False"/>
+      <field name="filter" eval="False"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="help"><![CDATA[<p>
+                          Wizard.
+                      </p>
+                  ]]></field>
+      <field name="limit">80</field>
+      <field name="multi" eval="False"/>
+      <field name="name">Hold Reason</field>
+      <field name="res_model">x_hold_reason_wizard</field>
+      <field name="search_view_id" eval="False"/>
+      <field name="src_model" eval="False"/>
+      <field name="target">new</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="usage" eval="False"/>
+      <field name="view_id" ref="phase2_ho_ps.x_hold_reason_form"/>
+      <field name="view_ids" eval="[(6, 0, [])]"/>
+      <field name="view_mode">form</field>
+      <field name="view_type">form</field>
+    </record>
+  </data>
+</openerp>
