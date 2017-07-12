@@ -9,7 +9,7 @@
     'description': """
 A Variet of improvements to sales...
         """,
-    'depends': ['base_action_rule','base_import','sale','purchase','stock','website_quote'],
+    'depends': ['base_action_rule','base_import','sale','purchase','stock','website_quote','account'],
     'data': [
         'data/ir_model.xml',
         'data/ir_model_fields.xml',

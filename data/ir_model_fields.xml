@@ -278,5 +278,35 @@
       <field name="translate" eval="False"/>
       <field name="ttype">selection</field>
     </record>
+    <!--ELEMENT 1.7-->
+    <record model="ir.model.fields" id="x_acc_origin">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+        sale = self.env['sale.order'].search([('name','=',record.origin)])
+        record['x_origin'] = sale and sale[0] or False
+        ]]></field>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Sale Order</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">account.invoice</field>
+      <field name="model_id" ref="account.model_account_invoice" />
+      <field name="name">x_origin</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation">sale.order</field>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="False"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">many2one</field>
+    </record>
   </data>
 </openerp>

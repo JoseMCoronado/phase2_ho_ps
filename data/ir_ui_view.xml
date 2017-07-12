@@ -130,5 +130,17 @@
       </field>
       <field name="priority">99</field>
     </record>
+    <!--ELEMENT 1.7-->
+    <record model="ir.ui.view" id="acc_form_mod">
+      <field name="name">x_jos.account.invoice.form.mod</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='payment_term_id']" position="after">
+          <field name="x_origin"/>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
   </data>
 </openerp>
