@@ -27,8 +27,9 @@ elif obj.purchase_id:
     action = action_data
 else:
     obj['x_hold'] = False
-    for picking in obj.picking_ids:
-      picking['x_dns'] = False
+    if obj.x_acc_hold != True:
+      for picking in obj.picking_ids:
+        picking['x_dns'] = False
       ]]>
     </field>
     <field name="crud_model_id" eval="False"/>
@@ -47,8 +48,9 @@ else:
       picking['x_dns'] = True
 else:
     obj['x_acc_hold'] = False
-    for picking in obj.picking_ids:
-      picking['x_dns'] = False
+    if obj.x_hold != True:
+      for picking in obj.picking_ids:
+        picking['x_dns'] = False
       ]]>
     </field>
     <field name="crud_model_id" eval="False"/>
