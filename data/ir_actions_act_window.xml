@@ -6,7 +6,7 @@
       <field name="child_ids" eval="[(6, 0, [])]"/>
       <field name="code"><![CDATA[obj.x_so_id.write({'x_hold':True,'x_hold_reason': obj.x_hold_reason})
 for picking in obj.x_so_id.picking_ids:
-  picking['x_dns'] = True 
+  picking['x_dns'] = True
         ]]>
       </field>
       <field name="crud_model_id" eval="False"/>
@@ -59,6 +59,31 @@ for picking in obj.x_so_id.picking_ids:
       <field name="view_id" ref="phase2_ho_ps.x_hold_reason_form"/>
       <field name="view_ids" eval="[(6, 0, [])]"/>
       <field name="view_mode">form</field>
+      <field name="view_type">form</field>
+    </record>
+    <!--ELEMENT 4.1-->
+    <record model="ir.actions.act_window" id="action_deliveres_pending">
+      <field name="auto_search" eval="True"/>
+      <field name="context">{}</field>
+      <field name="domain">[('state','not in',['done','cancel','draft'])]</field>
+      <field name="filter" eval="False"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="help"><![CDATA[<p>
+                          NONE
+                      </p>
+                  ]]></field>
+      <field name="limit">80</field>
+      <field name="multi" eval="False"/>
+      <field name="name">Deliveries Pending Shipping</field>
+      <field name="res_model">stock.picking</field>
+      <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+      <field name="src_model" eval="False"/>
+      <field name="target">current</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="usage" eval="False"/>
+      <field name="view_id" eval="False"/>
+      <field name="view_ids" eval="[(6, 0, [])]"/>
+      <field name="view_mode">tree,form</field>
       <field name="view_type">form</field>
     </record>
   </data>

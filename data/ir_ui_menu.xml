@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!--ELEMENT 4.1-->
+    <record model="ir.ui.menu" id="deliveries_pending_shipping">
+      <field ref="phase2_ho_ps.action_deliveres_pending" name="action"/><!--AHADJADJADAD-->
+      <field name="active" eval="True"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="name">Deliveries Pending Shipping</field>
+      <field ref="stock.menu_stock_warehouse_mgmt" name="parent_id"/>
+      <field name="sequence">10</field>
+      <field name="web_icon" eval="False"/>
+    </record>
+  </data>
+</openerp>

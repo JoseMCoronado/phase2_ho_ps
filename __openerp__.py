@@ -16,6 +16,7 @@ A Variet of improvements to sales...
         'data/ir_actions_act_window.xml',
         'data/ir_actions_server.xml',
         'data/ir_ui_view.xml',
+        'data/ir_ui_menu.xml',
         'data/base_automation.xml',
     ],
     'installable': True,
