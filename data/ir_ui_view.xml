@@ -57,10 +57,12 @@
               <button name="%(action_send_awaiting)d" attrs="{'invisible': [('x_state', 'not in', ['draft'])]}" string="Confirm for Approval" class="o_sale_confirm" type="action"/>
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='sent']" position="attributes">
-              <attribute name="groups">base.group_sale_manager</attribute>
+              <!--v10 fix <attribute name="groups">base.group_sale_manager</attribute>-->
+              <attribute name="groups">sales_team.group_sale_manager</attribute>
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='draft']" position="attributes">
-              <attribute name="groups">base.group_sale_manager</attribute>
+              <!-- v10 Fix <attribute name="groups">base.group_sale_manager</attribute>-->
+              <attribute name="groups">sales_team.group_sale_manager</attribute>
           </xpath>
         </data>
       </field>
@@ -98,7 +100,7 @@
       <field name="model">stock.picking</field>
       <field name="inherit_id" ref="stock.view_picking_form"/>
       <field name="arch" type="xml">
-        <xpath expr="//group[@class='hidden-xs']" position="after">
+        <xpath expr="//field[@name='partner_id']/../.." position="after">
               <group>
                 <field name="x_sc_notes"/>
               </group>

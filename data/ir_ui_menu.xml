@@ -26,7 +26,8 @@
       <field name="active" eval="True"/>
       <field name="groups_id" eval="[(6, 0, [])]"/>
       <field name="name">Sale Orders Not Cleared</field>
-      <field ref="base.menu_sales" name="parent_id"/>
+      <!--v10.0 Fix <field ref="base.menu_sales" name="parent_id"/>-->
+      <field ref="sales_team.menu_sales" name="parent_id"/>
       <field name="sequence">10</field>
       <field name="web_icon" eval="False"/>
     </record>
