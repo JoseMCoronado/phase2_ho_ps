@@ -136,5 +136,29 @@ for picking in obj.x_so_id.picking_ids:
       <field name="view_mode">tree,form</field>
       <field name="view_type">form</field>
     </record>
+    <record model="ir.actions.act_window" id="action_to_schedule_transfers">
+      <field name="auto_search" eval="True"/>
+      <field name="context">{}</field>
+      <field name="domain">[('state','not in',['done','cancel','draft']),('x_ship_date','!=',True)]</field>
+      <field name="filter" eval="False"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="help"><![CDATA[<p>
+                          NONE
+                      </p>
+                  ]]></field>
+      <field name="limit">80</field>
+      <field name="multi" eval="False"/>
+      <field name="name">To Schedule</field>
+      <field name="res_model">stock.picking</field>
+      <field name="search_view_id" ref="stock.model_stock_picking"/>
+      <field name="src_model" eval="False"/>
+      <field name="target">current</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="usage" eval="False"/>
+      <field name="view_id" ref="phase2_ho_ps.sp_to_schedule"/>
+      <field name="view_ids" eval="[(6, 0, [])]"/>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+    </record>
   </data>
 </openerp>

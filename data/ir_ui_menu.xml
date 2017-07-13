@@ -3,7 +3,7 @@
   <data>
     <!--ELEMENT 4.1-->
     <record model="ir.ui.menu" id="deliveries_pending_shipping">
-      <field ref="phase2_ho_ps.action_deliveres_pending" name="action"/><!--AHADJADJADAD-->
+      <field ref="phase2_ho_ps.action_deliveres_pending" name="action"/>
       <field name="active" eval="True"/>
       <field name="groups_id" eval="[(6, 0, [])]"/>
       <field name="name">Deliveries Pending Shipping</field>
@@ -13,7 +13,7 @@
     </record>
     <!--ELEMENT 4.2-->
     <record model="ir.ui.menu" id="downpayment_invoices">
-      <field ref="phase2_ho_ps.action_downpayment_invoices" name="action"/><!--AHADJADJADAD-->
+      <field ref="phase2_ho_ps.action_downpayment_invoices" name="action"/>
       <field name="active" eval="True"/>
       <field name="groups_id" eval="[(6, 0, [])]"/>
       <field name="name">Open Downpayment Invoices</field>
@@ -22,12 +22,22 @@
       <field name="web_icon" eval="False"/>
     </record>
     <record model="ir.ui.menu" id="not_cleared_sos">
-      <field ref="phase2_ho_ps.action_held_sale_orders" name="action"/><!--AHADJADJADAD-->
+      <field ref="phase2_ho_ps.action_held_sale_orders" name="action"/>
       <field name="active" eval="True"/>
       <field name="groups_id" eval="[(6, 0, [])]"/>
       <field name="name">Sale Orders Not Cleared</field>
       <field ref="base.menu_sales" name="parent_id"/>
       <field name="sequence">10</field>
+      <field name="web_icon" eval="False"/>
+    </record>
+    <!--PHASE 1 ELEMENT-->
+    <record model="ir.ui.menu" id="to_schedule_pickings">
+      <field ref="phase2_ho_ps.action_to_schedule_transfers" name="action"/>
+      <field name="active" eval="True"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="name">To Schedule</field>
+      <field ref="stock.menu_stock_root" name="parent_id"/>
+      <field name="sequence">30</field>
       <field name="web_icon" eval="False"/>
     </record>
   </data>

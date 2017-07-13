@@ -427,5 +427,87 @@
       <field name="translate" eval="False"/>
       <field name="ttype">boolean</field>
     </record>
+    <!-- PHASE 1 ELEMENT -->
+    <record model="ir.model.fields" id="x_sales_request">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Sales Request</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="name">x_sales_request</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">date</field>
+    </record>
+    <record model="ir.model.fields" id="x_internal_request">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Internal Request</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="name">x_internal_request</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">date</field>
+    </record>
+    <record model="ir.model.fields" id="x_ship_date">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Ship Sate</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="name">x_ship_date</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">date</field>
+    </record>
   </data>
 </openerp>
