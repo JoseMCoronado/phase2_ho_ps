@@ -136,10 +136,37 @@ for picking in obj.x_so_id.picking_ids:
       <field name="view_mode">tree,form</field>
       <field name="view_type">form</field>
     </record>
+    <!--PHASE 1 ELEMENT-->
+    <record model="ir.ui.view" id="sp_to_schedule">
+      <field name="name">x_jos.stock.picking.toschedule.tree</field>
+      <field name="model">stock.picking</field>
+      <field name="mode">primary</field>
+      <field name="type">tree</field>
+      <field name="inherit_id" eval="False"/>
+      <field name="arch" type="xml">
+          <tree string="To Schedule Pickings">
+            <field name="name"/>
+            <field name="location_id"/>
+            <field name="location_dest_id"/>
+            <field name="x_sales_request"/>
+            <field name="x_internal_request"/>
+            <field name="partner_id"/>
+            <field name="date" invisible="1"/>
+            <field name="min_date" invisible="1"/>
+            <field name="origin"/>
+            <field name="group_id" invisible="1"/>
+            <field name="backorder_id"/>
+            <field name="state"/>
+            <field name="priority" invisible="1"/>
+            <field name="picking_type_id" invisible="1"/>
+          </tree>
+      </field>
+      <field name="priority">16</field>
+    </record>
     <record model="ir.actions.act_window" id="action_to_schedule_transfers">
       <field name="auto_search" eval="True"/>
       <field name="context">{}</field>
-      <field name="domain">[('state','not in',['done','cancel','draft']),('x_ship_date','!=',True)]</field>
+      <field name="domain">[('state','not in',['done','cancel','draft']),('x_ship_date','=',False),('x_dns','!=',True)]</field>
       <field name="filter" eval="False"/>
       <field name="groups_id" eval="[(6, 0, [])]"/>
       <field name="help"><![CDATA[<p>
@@ -150,7 +177,7 @@ for picking in obj.x_so_id.picking_ids:
       <field name="multi" eval="False"/>
       <field name="name">To Schedule</field>
       <field name="res_model">stock.picking</field>
-      <field name="search_view_id" ref="stock.model_stock_picking"/>
+      <field name="search_view_id" ref="stock.view_picking_internal_search"/>
       <field name="src_model" eval="False"/>
       <field name="target">current</field>
       <field name="type">ir.actions.act_window</field>

@@ -399,9 +399,9 @@
     <record model="ir.model.fields" id="downpayment_classification">
       <field name="complete_name" eval="False"/>
       <field name="compute"><![CDATA[for record in self:
-    dlines = record.invoice_line_ids.search([('product_id.name','ilike','down payment''),('quantity','&gt;',0)])
-    if dlines:
-        record['x_downpayment'] = True
+    for l in record.invoice_line_ids:
+          if l.product_id.name == 'Down Payment' and l.quantity > 0:
+            record['x_downpayment'] = True
         ]]></field>
       <field name="copy" eval="False"/>
       <field name="depends">state,number</field>
