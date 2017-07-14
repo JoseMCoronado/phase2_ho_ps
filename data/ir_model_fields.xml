@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
+  <data noupdate="1">
     <!--Element 1.2-->
     <record model="ir.model.fields" id="x_so_sc_notes">
       <field name="complete_name" eval="False"/>
@@ -29,8 +29,6 @@
       <field name="translate" eval="False"/>
       <field name="ttype">text</field>
     </record>
-  </data>
-  <data>
     <record model="ir.model.fields" id="x_po_sc_notes">
       <field name="complete_name" eval="False"/>
       <field name="compute" eval="False"/>
@@ -58,8 +56,6 @@
       <field name="translate" eval="False"/>
       <field name="ttype">text</field>
     </record>
-  </data>
-  <data>
     <record model="ir.model.fields" id="x_sp_sc_notes">
       <field name="complete_name" eval="False"/>
       <field name="compute" eval="False"/>

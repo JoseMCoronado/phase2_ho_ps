@@ -12,6 +12,14 @@
             <attribute name="placeholder">Order Note...</attribute>
           </xpath>
           <!--ELEMENT 1.2-->
+          <!--=<xpath expr="//button[@name='action_confirm']" position="attributes">
+            <attribute name="name">%(action_transfer_so_notes)d</attribute>
+            <attribute name="type">action</attribute>
+          </xpath>-->
+          <!--<xpath expr="//button[@name='action_confirm' and @states='draft']" position="attributes">
+            <attribute name="name">%(action_transfer_so_notes)d</attribute>
+            <attribute name="type">action</attribute>
+          </xpath>-->
           <xpath expr="//notebook" position="inside">
             <page string="Supply Chain Notes">
                 <group>
@@ -58,9 +66,13 @@
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='sent']" position="attributes">
               <attribute name="groups">base.group_sale_manager</attribute>
+              <attribute name="name">%(action_transfer_so_notes)d</attribute>
+              <attribute name="type">action</attribute>
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='draft']" position="attributes">
               <attribute name="groups">base.group_sale_manager</attribute>
+              <attribute name="name">%(action_transfer_so_notes)d</attribute>
+              <attribute name="type">action</attribute>
           </xpath>
         </data>
       </field>
@@ -83,6 +95,14 @@
       <field name="model">purchase.order</field>
       <field name="inherit_id" ref="purchase.purchase_order_form"/>
       <field name="arch" type="xml">
+        <xpath expr="//button[@id='draft_confirm']" position="attributes">
+          <attribute name="name">%(action_transfer_po_notes)d</attribute>
+          <attribute name="type">action</attribute>
+        </xpath>
+        <xpath expr="//button[@id='bid_confirm']" position="attributes">
+          <attribute name="name">%(action_transfer_po_notes)d</attribute>
+          <attribute name="type">action</attribute>
+        </xpath>
         <xpath expr="//notebook" position="inside">
           <page string="Supply Chain Notes">
               <group>

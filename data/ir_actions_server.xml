@@ -2,7 +2,7 @@
 <openerp>
   <data>
     <!--ELEMENT 1.2-->
-    <record model="ir.actions.server" id="assign_sc_notes">
+    <!--<record model="ir.actions.server" id="assign_sc_notes">
       <field name="child_ids" eval="[(6, 0, [])]"/>
       <field name="code"><![CDATA[if obj.sale_id:
       obj['x_sc_notes'] = obj.sale_id.x_sc_notes
@@ -15,6 +15,36 @@ elif obj.purchase_id:
       <field name="link_field_id" eval="False"/>
       <field name="model_id" ref="stock.model_stock_picking"/>
       <field name="name">[JOS] Assign SC Notes on Creation of Stock Picking</field>
+      <field name="sequence">5</field>
+      <field name="state">code</field>
+    </record>-->
+    <record model="ir.actions.server" id="action_transfer_so_notes">
+      <field name="child_ids" eval="[(6, 0, [])]"/>
+      <field name="code"><![CDATA[obj.action_confirm()
+for picking in obj.picking_ids:
+  picking['x_sc_notes'] = obj.x_sc_notes
+        ]]>
+      </field>
+      <field name="crud_model_id" eval="False"/>
+      <field name="help" eval="False"/>
+      <field name="link_field_id" eval="False"/>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">[JOS] Transfer SO SC Notes on Confirmation</field>
+      <field name="sequence">5</field>
+      <field name="state">code</field>
+    </record>
+    <record model="ir.actions.server" id="action_transfer_po_notes">
+      <field name="child_ids" eval="[(6, 0, [])]"/>
+      <field name="code"><![CDATA[obj.button_confirm()
+for picking in obj.picking_ids:
+  picking['x_sc_notes'] = obj.x_sc_notes
+        ]]>
+      </field>
+      <field name="crud_model_id" eval="False"/>
+      <field name="help" eval="False"/>
+      <field name="link_field_id" eval="False"/>
+      <field name="model_id" ref="purchase.model_purchase_order"/>
+      <field name="name">[JOS] Transfer PO SC Notes on Confirmation</field>
       <field name="sequence">5</field>
       <field name="state">code</field>
     </record>

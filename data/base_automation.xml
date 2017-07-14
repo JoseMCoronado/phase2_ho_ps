@@ -2,14 +2,14 @@
 <openerp>
   <data>
     <!--ELEMENT 1.2-->
-    <record id="auto_assign_sc_notes" model="base.action.rule">
+    <!--<record id="auto_assign_sc_notes" model="base.action.rule">
       <field name="name">[JOS] Assign SC Notes on Creation of Stock Picking</field>
       <field name="active" eval="True"/>
       <field name="model_id" ref="stock.model_stock_picking"/>
       <field name="sequence" eval="2"/>
       <field name="kind">on_create</field>
       <field name="server_action_ids" eval="[(6, 0, [ref('assign_sc_notes')])]"/>
-    </record>
+    </record>-->
     <!--ELEMENT 1.6-->
     <record id="auto_change_state" model="base.action.rule">
       <field name="name">[JOS] Assign x_state based on state</field>

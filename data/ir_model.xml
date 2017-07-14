@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
+  <data noupdate="1">
     <record model="ir.model" id="x_hold_reason_wizard">
       <field name="info"> Wizard to set hold reason.</field>
       <field name="model">x_hold_reason_wizard</field>
