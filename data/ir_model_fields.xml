@@ -424,18 +424,18 @@
       <field name="ttype">boolean</field>
     </record>
     <!-- PHASE 1 ELEMENT -->
-    <record model="ir.model.fields" id="x_sales_request">
+    <record model="ir.model.fields" id="x_so_sales_request">
       <field name="complete_name" eval="False"/>
       <field name="compute" eval="False"/>
       <field name="copy" eval="False"/>
       <field name="depends" eval="False"/>
       <field name="domain">[]</field>
-      <field name="field_description">Sales Request</field>
+      <field name="field_description">Cust. Req. Ship Date</field>
       <field name="groups" eval="[(6, 0, [])]"/>
       <field name="help" eval="False"/>
       <field name="index" eval="False"/>
-      <field name="model">stock.picking</field>
-      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="model">sale.order</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
       <field name="name">x_sales_request</field>
       <field name="on_delete">set null</field>
       <field name="readonly" eval="False"/>
@@ -449,9 +449,9 @@
       <field name="state">manual</field>
       <field name="store" eval="True"/>
       <field name="translate" eval="False"/>
-      <field name="ttype">date</field>
+      <field name="ttype">datetime</field>
     </record>
-    <record model="ir.model.fields" id="x_internal_request">
+    <record model="ir.model.fields" id="x_sp_internal_request">
       <field name="complete_name" eval="False"/>
       <field name="compute" eval="False"/>
       <field name="copy" eval="False"/>
@@ -484,7 +484,7 @@
       <field name="copy" eval="False"/>
       <field name="depends" eval="False"/>
       <field name="domain">[]</field>
-      <field name="field_description">Ship Sate</field>
+      <field name="field_description">Est. Ship Date</field>
       <field name="groups" eval="[(6, 0, [])]"/>
       <field name="help" eval="False"/>
       <field name="index" eval="False"/>
@@ -504,6 +504,183 @@
       <field name="store" eval="True"/>
       <field name="translate" eval="False"/>
       <field name="ttype">date</field>
+    </record>
+    <record model="ir.model.fields" id="x_so_last_ship">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Last Ship Date</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">sale.order</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">x_last_ship</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">datetime</field>
+    </record>
+    <record model="ir.model.fields" id="x_sp_internal_last">
+      <field name="complete_name" eval="False"/>
+      <field name="compute" eval="False"/>
+      <field name="copy" eval="False"/>
+      <field name="depends" eval="False"/>
+      <field name="domain">[]</field>
+      <field name="field_description">Last Ship Date</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="name">x_internal_last_ship</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="False"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">datetime</field>
+    </record>
+    <record model="ir.model.fields" id="x_sp_sales_request">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+        sale = self.env['sale.order'].search([('name','=',record.origin)])
+        record['x_sales_request'] = sale.x_sales_request or False
+        ]]></field>
+        <field name="copy" eval="False"/>
+        <field name="depends">origin</field>
+        <field name="domain">[]</field>
+        <field name="field_description">Sales Request</field>
+        <field name="groups" eval="[(6, 0, [])]"/>
+        <field name="help" eval="False"/>
+        <field name="index" eval="False"/>
+        <field name="model">stock.picking</field>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="name">x_sales_request</field>
+        <field name="on_delete">set null</field>
+        <field name="readonly" eval="True"/>
+        <field name="related" eval="False"/>
+        <field name="relation" eval="False"/>
+        <field name="relation_field" eval="False"/>
+        <field name="required" eval="False"/>
+        <field name="selectable" eval="True"/>
+        <field name="selection" eval="False"/>
+        <field name="size" eval="False"/>
+        <field name="state">manual</field>
+        <field name="store" eval="True"/>
+        <field name="translate" eval="False"/>
+        <field name="ttype">date</field>
+      </record>
+    <record model="ir.model.fields" id="x_sp_last_ship">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+    sale = self.env['sale.order'].search([('name','=',record.origin)])
+    record['x_last_ship'] = sale.x_last_ship or False
+        ]]></field>
+      <field name="copy" eval="False"/>
+      <field name="depends">origin</field>
+      <field name="domain">[]</field>
+      <field name="field_description">Last Ship Date</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">stock.picking</field>
+      <field name="model_id" ref="stock.model_stock_picking"/>
+      <field name="name">x_last_ship</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">datetime</field>
+    </record>
+    <!--ELEMENT 4.3-->
+    <record model="ir.model.fields" id="x_so_open_transfers">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+    for picking in record.picking_ids:
+      if picking.state not in ['done','cancel']:
+        record['x_open_transfers'] = True
+        ]]></field>
+        <field name="copy" eval="False"/>
+      <field name="depends">state,invoice_status</field>
+      <field name="domain">[]</field>
+      <field name="field_description">Open Transfers</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">sale.order</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">x_open_transfers</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">boolean</field>
+    </record>
+    <record model="ir.model.fields" id="x_so_open_invoices">
+      <field name="complete_name" eval="False"/>
+      <field name="compute"><![CDATA[for record in self:
+    for invoice in record.invoice_ids:
+      if invoice.state in ['open']:
+        record['x_open_invoices'] = True
+        ]]></field>
+        <field name="copy" eval="False"/>
+      <field name="depends">state,invoice_status</field>
+      <field name="domain">[]</field>
+      <field name="field_description">Open Invoices</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="help" eval="False"/>
+      <field name="index" eval="False"/>
+      <field name="model">sale.order</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">x_open_invoices</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">boolean</field>
     </record>
   </data>
 </openerp>

@@ -40,5 +40,15 @@
       <field name="sequence">0</field>
       <field name="web_icon" eval="False"/>
     </record>
+    <!--ElEMENT 4.3-->
+    <record model="ir.ui.menu" id="menu_order_notshipped_openbalance">
+      <field ref="phase2_ho_ps.action_not_shipped_open_balance" name="action"/>
+      <field name="active" eval="True"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="name">Orders Not Shipped with Open Balances</field>
+      <field ref="sale.menu_sale_invoicing" name="parent_id"/>
+      <field name="sequence">0</field>
+      <field name="web_icon" eval="False"/>
+    </record>
   </data>
 </openerp>

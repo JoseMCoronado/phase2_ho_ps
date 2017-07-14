@@ -141,7 +141,14 @@
           <field name="x_incoterm_id"/>
           <field name="x_freight_booked"/>
         </xpath>
-
+        <!--PHASE 1 ELEMENT-->
+        <xpath expr="//field[@name='min_date']" position="before">
+          <field name="x_sales_request" attrs="{'invisible': [('x_sales_request', '=', False)]}"/>
+          <field name="x_internal_request" attrs="{'invisible': [('x_sales_request', '!=', False)]}"/>
+          <field name="x_internal_last_ship" attrs="{'invisible': [('x_last_ship', '!=', False)]}"/>
+          <field name="x_last_ship" attrs="{'invisible': [('x_last_ship', '=', False)]}"/>
+          <field name="x_ship_date"/>
+        </xpath>
       </field>
       <field name="priority">99</field>
     </record>

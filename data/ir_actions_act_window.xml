@@ -187,5 +187,51 @@ for picking in obj.x_so_id.picking_ids:
       <field name="view_mode">tree,form</field>
       <field name="view_type">form</field>
     </record>
+    <!--ELEMENT 4.3-->
+    <record model="ir.ui.view" id="so_not_shipped_open_balance">
+      <field name="name">x_jos.sale.order.opennotshipped.tree</field>
+      <field name="model">sale.order</field>
+      <field name="mode">primary</field>
+      <field name="type">tree</field>
+      <field name="inherit_id" eval="False"/>
+      <field name="arch" type="xml">
+          <tree string="Not Shipped with Open Balances">
+            <field name="name"/>
+            <field name="date_order"/>
+            <field name="partner_id"/>
+            <field name="user_id"/>
+            <field name="amount_total" sum="Total Tax Included" widget="monetary"/>
+            <field name="invoice_status"/>
+            <field name="state" invisible="1"/>
+            <field name="x_open_transfers" invisible="1"/>
+            <field name="x_open_invoices" invisible="1"/>
+          </tree>
+      </field>
+      <field name="priority">16</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_not_shipped_open_balance">
+      <field name="auto_search" eval="True"/>
+      <field name="context">{'show_sale':True}</field>
+      <field name="domain">[('invoice_status','=','to invoice'),('x_open_invoices','=',True),('x_open_transfers','=',True)]</field>
+      <field name="filter" eval="False"/>
+      <field name="groups_id" eval="[(6, 0, [])]"/>
+      <field name="help"><![CDATA[<p>
+                          NONE
+                      </p>
+                  ]]></field>
+      <field name="limit">80</field>
+      <field name="multi" eval="False"/>
+      <field name="name">Sale Orders not Shipped with Open Balances</field>
+      <field name="res_model">sale.order</field>
+      <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+      <field name="src_model" eval="False"/>
+      <field name="target">current</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="usage" eval="False"/>
+      <field name="view_id" ref="phase2_ho_ps.so_not_shipped_open_balance"/>
+      <field name="view_ids" eval="[(6, 0, [])]"/>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+    </record>
   </data>
 </openerp>
