@@ -30,11 +30,11 @@
           <!--ELEMENT 1.4-->
           <xpath expr="//div[@name='button_box']" position="inside">
               <button attrs="{'invisible': [('state', 'not in', ('sale'))]}" name="%(action_pre_sales_hold)d" type="action" class="oe_stat_button" icon="fa-hand-paper-o">
-                  <strong>Sales Hold</strong>
+                  <strong>SALES DNS</strong>
                   <field string="Sales Hold" name="x_hold" invisible="1"/>
               </button>
               <button attrs="{'invisible': [('state', 'not in', ('sale'))]}" name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
-                  <strong>Accounting Hold</strong>
+                  <strong>ACCOUNTING DNS</strong>
                   <field string="Accounting Hold" name="x_acc_hold" invisible="1" />
               </button>
           </xpath>
@@ -42,14 +42,15 @@
               <div attrs="{'invisible':[('x_hold','!=',True),('x_acc_hold','!=',True)]}" class="row" style="text-align:center;background-color:red;">
                 <div>
                   <h2 style="color:white;">
-                    <strong>ORDER ON HOLD  </strong>
-                    <strong attrs="{'invisible':[('x_hold','!=',True)]}">HELD BY SALES  </strong>
-                    <strong attrs="{'invisible':[('x_acc_hold','!=',True)]}">HELD BY ACCOUNTING</strong>
+                    <strong>DO NOT SHIP ORDER - </strong>
+                    <strong attrs="{'invisible':[('x_hold','!=',True)]}">SALES</strong>
+                    <strong attrs="{'invisible':['|',('x_hold','!=',True),('x_acc_hold','!=',True)]}"> AND </strong>
+                    <strong attrs="{'invisible':[('x_acc_hold','!=',True)]}">ACCOUNTING</strong>
                   </h2>
                 </div>
                 <div>
                   <h4 style="color:white;">
-                  <strong attrs="{'invisible':[('x_hold','!=',True)]}">Sales Hold Reason: <field name="x_hold_reason"/></strong>
+                  <strong attrs="{'invisible':[('x_hold','!=',True)]}">SALES DNS REASON: <field name="x_hold_reason"/></strong>
                 </h4>
                 </div>
               </div>
@@ -73,6 +74,10 @@
               <attribute name="groups">base.group_sale_manager</attribute>
               <attribute name="name">%(action_transfer_so_notes)d</attribute>
               <attribute name="type">action</attribute>
+          </xpath>
+          <xpath expr="//field[@name='confirmation_date']" position="after">
+              <field name="x_sales_request"/>
+              <field name="x_last_ship"/>
           </xpath>
         </data>
       </field>
@@ -149,6 +154,11 @@
           <field name="x_last_ship" attrs="{'invisible': [('x_last_ship', '=', False)]}"/>
           <field name="x_ship_date"/>
         </xpath>
+        <xpath expr="//field[@name='priority']" position="replace"/>
+        <xpath expr="//field[@name='origin']" position="after">
+          <field name="priority"/>
+        </xpath>
+
       </field>
       <field name="priority">99</field>
     </record>
@@ -159,6 +169,9 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='name']" position="after">
           <field name="x_dns"/>
+        </xpath>
+        <xpath expr="//field[@name='origin']" position="before">
+          <field name="x_ship_date"/>
         </xpath>
       </field>
       <field name="priority">99</field>
@@ -196,6 +209,21 @@
           <attribute name="string">Delivery Method</attribute>
           <attribute name="domain">[('x_display_so','=',True)]</attribute>
           <attribute name="invisible">0</attribute>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <!--CALL ADDITTIONS-->
+    <record model="ir.ui.view" id="acc_invoice_tree_mod">
+      <field name="name">x_jos.account.invoice.tree.mod</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='residual_signed']" position="attributes">
+          <attribute name="sum">Total</attribute>
+        </xpath>
+        <xpath expr="//field[@name='amount_total_signed']" position="attributes">
+          <attribute name="sum">Total</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>

@@ -21,6 +21,7 @@ elif obj.purchase_id:
     <record model="ir.actions.server" id="action_transfer_so_notes">
       <field name="child_ids" eval="[(6, 0, [])]"/>
       <field name="code"><![CDATA[obj.action_confirm()
+obj['x_acc_hold'] = True
 for picking in obj.picking_ids:
   picking['x_sc_notes'] = obj.x_sc_notes
         ]]>

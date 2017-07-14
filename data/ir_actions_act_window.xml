@@ -24,7 +24,7 @@ for picking in obj.x_so_id.picking_ids:
       <field name="inherit_id" eval="False"/>
       <field name="arch" type="xml">
         <form>
-              <strong><p>Please write reason for holding the order below. Thanks!</p></strong>
+              <strong><p>Please write reason for not shipping the order below. Thanks!</p></strong>
               <group>
                   <field name="x_hold_reason"/>
                   <field name="x_so_id" invisible="1"/>
@@ -49,7 +49,7 @@ for picking in obj.x_so_id.picking_ids:
                   ]]></field>
       <field name="limit">80</field>
       <field name="multi" eval="False"/>
-      <field name="name">Hold Reason</field>
+      <field name="name">Do Not Ship Reason</field>
       <field name="res_model">x_hold_reason_wizard</field>
       <field name="search_view_id" eval="False"/>
       <field name="src_model" eval="False"/>

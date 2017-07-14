@@ -396,7 +396,7 @@
       <field name="complete_name" eval="False"/>
       <field name="compute"><![CDATA[for record in self:
     for l in record.invoice_line_ids:
-          if l.product_id.name == 'Down Payment' and l.quantity > 0:
+          if l.product_id.name == 'Down payment' and l.quantity > 0:
             record['x_downpayment'] = True
         ]]></field>
       <field name="copy" eval="False"/>
@@ -562,8 +562,8 @@
     <record model="ir.model.fields" id="x_sp_sales_request">
       <field name="complete_name" eval="False"/>
       <field name="compute"><![CDATA[for record in self:
-        sale = self.env['sale.order'].search([('name','=',record.origin)])
-        record['x_sales_request'] = sale.x_sales_request or False
+        if record.sale_id:
+          record['x_sales_request'] = record.sale_id.x_sales_request
         ]]></field>
         <field name="copy" eval="False"/>
         <field name="depends">origin</field>
@@ -592,8 +592,8 @@
     <record model="ir.model.fields" id="x_sp_last_ship">
       <field name="complete_name" eval="False"/>
       <field name="compute"><![CDATA[for record in self:
-    sale = self.env['sale.order'].search([('name','=',record.origin)])
-    record['x_last_ship'] = sale.x_last_ship or False
+    if record.sale_id:
+      record['x_last_ship'] = record.sale_id.x_last_ship
         ]]></field>
       <field name="copy" eval="False"/>
       <field name="depends">origin</field>
