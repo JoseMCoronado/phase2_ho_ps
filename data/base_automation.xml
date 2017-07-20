@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <!--ELEMENT 1.2-->
-    <!--<record id="auto_assign_sc_notes" model="base.action.rule">
-      <field name="name">[JOS] Assign SC Notes on Creation of Stock Picking</field>
-      <field name="active" eval="True"/>
-      <field name="model_id" ref="stock.model_stock_picking"/>
-      <field name="sequence" eval="2"/>
-      <field name="kind">on_create</field>
-      <field name="server_action_ids" eval="[(6, 0, [ref('assign_sc_notes')])]"/>
-    </record>-->
     <!--ELEMENT 1.6-->
     <record id="auto_change_state" model="base.action.rule">
       <field name="name">[JOS] Assign x_state based on state</field>
@@ -27,6 +18,27 @@
       <field name="kind">on_change</field>
       <field name="on_change_fields">x_ship_date</field>
       <field name="server_action_ids" eval="[(6, 0, [ref('action_set_est_ship_date')])]"/>
+    </record>
+    <!--ELEMENT 3.1-->
+    <record id="auto_send_exp_reminder" model="base.action.rule">
+      <field name="name">[JOS] Send Quote Exp. Reminder</field>
+      <field name="active" eval="True"/>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="sequence" eval="2"/>
+      <field name="kind">on_time</field>
+      <field name="trg_date_id" ref="sale.field_sale_order_validity_date"/>
+      <field name="trg_date_range">-7</field>
+      <field name="trg_date_range_type">day</field>
+      <field name="server_action_ids" eval="[(6, 0, [ref('action_send_exp_reminder')])]"/>
+    </record>
+    <!--ELEMENT 3.4-->
+    <record id="auto_send_payment_thankyou" model="base.action.rule">
+      <field name="name">[JOS] Send Thank You Receipt of Payment</field>
+      <field name="active" eval="True"/>
+      <field name="model_id" ref="account.model_account_payment"/>
+      <field name="sequence" eval="2"/>
+      <field name="kind">on_create</field>
+      <field name="server_action_ids" eval="[(6, 0, [ref('action_send_thank_you_receipt')])]"/>
     </record>
   </data>
 </openerp>

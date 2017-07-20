@@ -11,15 +11,6 @@
           <xpath expr="//field[@name='note']" position="attributes">
             <attribute name="placeholder">Order Note...</attribute>
           </xpath>
-          <!--ELEMENT 1.2-->
-          <!--=<xpath expr="//button[@name='action_confirm']" position="attributes">
-            <attribute name="name">%(action_transfer_so_notes)d</attribute>
-            <attribute name="type">action</attribute>
-          </xpath>-->
-          <!--<xpath expr="//button[@name='action_confirm' and @states='draft']" position="attributes">
-            <attribute name="name">%(action_transfer_so_notes)d</attribute>
-            <attribute name="type">action</attribute>
-          </xpath>-->
           <xpath expr="//notebook" position="inside">
             <page string="Supply Chain Notes">
                 <group>
@@ -60,24 +51,28 @@
              <field name="state" widget="statusbar" invisible="1" statusbar_visible="draft,sent,sale,done"/>
              <field name="x_state" widget="statusbar" statusbar_visible="draft,sent,awaiting,sale,done"/>
           </xpath>
-          <!--ELEMENT 1.6-->
+          <!--ELEMENT 1.2 & 1.6-->
           <xpath expr="//button[@name='action_confirm' and @states='sent']" position="before">
               <button name="%(action_send_awaiting)d"  attrs="{'invisible': [('x_state', 'not in', ['sent'])]}" string="Confirm for Approval" class="btn-primary o_sale_confirm" type="action"/>
               <button name="%(action_send_awaiting)d" attrs="{'invisible': [('x_state', 'not in', ['draft'])]}" string="Confirm for Approval" class="o_sale_confirm" type="action"/>
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='sent']" position="attributes">
               <attribute name="groups">base.group_sale_manager</attribute>
-              <attribute name="name">%(action_transfer_so_notes)d</attribute>
+              <attribute name="name">%(action_so_confirmation_multi)d</attribute>
               <attribute name="type">action</attribute>
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='draft']" position="attributes">
               <attribute name="groups">base.group_sale_manager</attribute>
-              <attribute name="name">%(action_transfer_so_notes)d</attribute>
+              <attribute name="name">%(action_so_confirmation_multi)d</attribute>
               <attribute name="type">action</attribute>
           </xpath>
           <xpath expr="//field[@name='confirmation_date']" position="after">
               <field name="x_sales_request"/>
               <field name="x_last_ship"/>
+          </xpath>
+          <!--ELEMENT 3.1-->
+          <xpath expr="//field[@name='validity_date']" position="after">
+            <field name="x_opt_out" string="Exp. Reminder Opt Out" attrs="{'invisible':[('state','in',['sale','done'])]}"/>
           </xpath>
         </data>
       </field>
@@ -146,6 +141,12 @@
           <field name="x_incoterm_id"/>
           <field name="x_freight_booked"/>
         </xpath>
+        <!--ELEMENT 3.3-->
+        <xpath expr="//div[@name='button_box']" position="inside">
+          <button type="action" name="%(action_send_est_ship_date_mail)d" class="oe_stat_button" icon="fa-envelope">
+            <strong>SEND EST SHIP</strong>
+          </button>
+        </xpath>
         <!--PHASE 1 ELEMENT-->
         <xpath expr="//field[@name='min_date']" position="before">
           <field name="x_sales_request" attrs="{'invisible': [('x_sales_request', '=', False)]}"/>
@@ -184,6 +185,14 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='payment_term_id']" position="after">
           <field name="x_origin"/>
+        </xpath>
+        <!--ELEMENT 3.5-->
+        <xpath expr="//sheet/label" position="before">
+          <div class="oe_button_box" name="button_box">
+            <button attrs="{'invisible': [('state', 'not in', ('open','paid'))]}" name="%(action_send_final_invoice)d" type="action" class="oe_stat_button" icon="fa-envelope">
+              <strong>FINAL INV</strong>
+            </button>
+          </div>
         </xpath>
       </field>
       <field name="priority">99</field>
