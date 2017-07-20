@@ -622,13 +622,20 @@
     <!--ELEMENT 4.3-->
     <record model="ir.model.fields" id="x_so_open_transfers">
       <field name="domain">[]</field>
+      <field name="depends">state</field>
+      <field name="compute"><![CDATA[for record in self:
+    for picking in record.picking_ids:
+      if picking.state not in ['done','cancel']:
+        record['x_open_transfers'] = True
+        ]]>
+      </field>
       <field name="field_description">Open Transfers</field>
       <field name="groups" eval="[(6, 0, [])]"/>
       <field name="model">sale.order</field>
       <field name="model_id" ref="sale_order_dates.model_sale_order"/>
       <field name="name">x_open_transfers</field>
       <field name="on_delete">set null</field>
-      <field name="readonly" eval="False"/>
+      <field name="readonly" eval="True"/>
       <field name="related" eval="False"/>
       <field name="relation" eval="False"/>
       <field name="relation_field" eval="False"/>
@@ -643,11 +650,90 @@
     </record>
     <record model="ir.model.fields" id="x_so_open_invoices">
       <field name="domain">[]</field>
+      <field name="depends">state</field>
+      <field name="compute"><![CDATA[for record in self:
+    for invoice in record.invoice_ids:
+      if invoice.state in ['open']:
+        record['x_open_invoices'] = True
+        ]]></field>
       <field name="field_description">Open Invoices</field>
       <field name="groups" eval="[(6, 0, [])]"/>
       <field name="model">sale.order</field>
       <field name="model_id" ref="sale_order_dates.model_sale_order"/>
       <field name="name">x_open_invoices</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">boolean</field>
+    </record>
+    <record model="ir.model.fields" id="x_pol_line_volume">
+      <field name="domain">[]</field>
+      <field name="field_description">Total CBM</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="compute"><![CDATA[for record in self:
+     record['x_line_volume'] = record.product_id.x_cubic_meters * record.product_qty
+        ]]></field>
+      <field name="model">purchase.order.line</field>
+      <field name="model_id" ref="purchase.model_purchase_order_line"/>
+      <field name="name">x_line_volume</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="False"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">float</field>
+    </record>
+    <record model="ir.model.fields" id="x_po_volume_total">
+      <field name="domain">[]</field>
+      <field name="field_description">CBM Total</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="compute"><![CDATA[for record in self:
+    total=0
+    for l in record.order_line:
+         total += l.x_line_volume
+    record['x_volume_total'] = total
+        ]]></field>
+      <field name="model">purchase.order</field>
+      <field name="model_id" ref="purchase.model_purchase_order"/>
+      <field name="name">x_volume_total</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related" eval="False"/>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection" eval="False"/>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="False"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">float</field>
+    </record>
+    <!--ELEMENT 3.1-->
+    <record model="ir.model.fields" id="x_so_opt_out">
+      <field name="domain">[]</field>
+      <field name="field_description">Opt Out</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="model">sale.order</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">x_opt_out</field>
       <field name="on_delete">set null</field>
       <field name="readonly" eval="False"/>
       <field name="related" eval="False"/>

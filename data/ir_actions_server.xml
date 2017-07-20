@@ -7,6 +7,7 @@
 obj['x_acc_hold'] = True
 for picking in obj.picking_ids:
   picking['x_sc_notes'] = obj.x_sc_notes
+  picking['x_dns'] = True
         ]]>
       </field>
       <field name="crud_model_id" eval="False"/>
@@ -16,6 +17,27 @@ for picking in obj.picking_ids:
       <field name="name">[JOS] Transfer SO SC Notes on Confirmation</field>
       <field name="sequence">5</field>
       <field name="state">code</field>
+    </record>
+    <record model="ir.actions.server" id="action_send_so_confirmation_email">
+      <field name="child_ids" eval="[(6, 0, [])]"/>
+      <field name="crud_model_id" eval="False"/>
+      <field name="help" eval="False"/>
+      <field name="link_field_id" eval="False"/>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">[JOS] Send SO Confirmation Email</field>
+      <field name="sequence">5</field>
+      <field name="state">email</field>
+      <field name="template_id" ref="sale.email_template_edi_sale"/> <!--NEED CHANGE WHEN LIVE-->
+    </record>
+    <record model="ir.actions.server" id="action_so_confirmation_multi">
+      <field name="child_ids" eval="[(6, 0, [ref('action_send_so_confirmation_email'),ref('action_transfer_so_notes')])]"/>
+      <field name="crud_model_id" eval="False"/>
+      <field name="help" eval="False"/>
+      <field name="link_field_id" eval="False"/>
+      <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+      <field name="name">[JOS] On Confirmation of SO (Multi)</field>
+      <field name="sequence">5</field>
+      <field name="state">multi</field>
     </record>
     <record model="ir.actions.server" id="action_transfer_po_notes">
       <field name="child_ids" eval="[(6, 0, [])]"/>
@@ -119,6 +141,56 @@ else:
     <field name="name">[JOS] Set Est. Ship Date on Transfer</field>
     <field name="sequence">5</field>
     <field name="state">code</field>
+  </record>
+  <!--ELEMENT 3.1-->
+  <record model="ir.actions.server" id="action_send_exp_reminder">
+    <field name="child_ids" eval="[(6, 0, [])]"/>
+    <field name="crud_model_id" eval="False"/>
+    <field name="help" eval="False"/>
+    <field name="link_field_id" eval="False"/>
+    <field name="model_id" ref="sale_order_dates.model_sale_order"/>
+    <field name="name">[JOS] Send Quote Exp. Reminder</field>
+    <field name="sequence">5</field>
+    <field name="state">email</field>
+    <field name="condition">object.x_opt_out!=True</field>
+    <field name="template_id" ref="sale.email_template_edi_sale"/> <!--NEED CHANGE WHEN LIVE-->
+  </record>
+  <!--ELEMENT 3.3-->
+  <record model="ir.actions.server" id="action_send_est_ship_date_mail">
+    <field name="child_ids" eval="[(6, 0, [])]"/>
+    <field name="crud_model_id" eval="False"/>
+    <field name="help" eval="False"/>
+    <field name="link_field_id" eval="False"/>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="name">[JOS] Send Est Ship Date Email</field>
+    <field name="sequence">5</field>
+    <field name="state">email</field>
+    <field name="template_id" ref="__export__.mail_template_62"/><!--NEED CHANGE WHEN LIVE-->
+  </record>
+  <!--ELEMENT 3.4-->
+  <record model="ir.actions.server" id="action_send_thank_you_receipt">
+    <field name="child_ids" eval="[(6, 0, [])]"/>
+    <field name="crud_model_id" eval="False"/>
+    <field name="help" eval="False"/>
+    <field name="link_field_id" eval="False"/>
+    <field name="model_id" ref="account.model_account_payment"/>
+    <field name="name">[JOS] Send Thank You Receipt of Payment</field>
+    <field name="sequence">5</field>
+    <field name="state">email</field>
+    <field name="condition">object.payment_type=='inbound' and object.partner_type=='customer'</field>
+    <field name="template_id" ref="__export__.mail_template_63"/><!--NEED CHANGE WHEN LIVE-->
+  </record>
+  <!--ELEMENT 3.5-->
+  <record model="ir.actions.server" id="action_send_final_invoice">
+    <field name="child_ids" eval="[(6, 0, [])]"/>
+    <field name="crud_model_id" eval="False"/>
+    <field name="help" eval="False"/>
+    <field name="link_field_id" eval="False"/>
+    <field name="model_id" ref="account.model_account_invoice"/>
+    <field name="name">[JOS] Send Final Invoice</field>
+    <field name="sequence">5</field>
+    <field name="state">email</field>
+    <field name="template_id" ref="account.email_template_edi_invoice"/><!--NEED CHANGE WHEN LIVE-->
   </record>
 </data>
 </openerp>
