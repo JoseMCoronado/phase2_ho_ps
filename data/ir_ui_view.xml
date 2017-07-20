@@ -155,6 +155,9 @@
           <field name="x_last_ship" attrs="{'invisible': [('x_last_ship', '=', False)]}"/>
           <field name="x_ship_date"/>
         </xpath>
+        <xpath expr="//field[@name='x_min_date']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
         <xpath expr="//field[@name='priority']" position="replace"/>
         <xpath expr="//field[@name='origin']" position="after">
           <field name="priority"/>

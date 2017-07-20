@@ -40,5 +40,7 @@
       <field name="kind">on_create</field>
       <field name="server_action_ids" eval="[(6, 0, [ref('action_send_thank_you_receipt')])]"/>
     </record>
+    <!--PHASE 1-->
+
   </data>
 </openerp>

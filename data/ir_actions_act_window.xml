@@ -234,7 +234,8 @@ for picking in obj.x_so_id.picking_ids:
       <field name="view_type">form</field>
     </record>
     <record model="ir.actions.act_window" id="stock.stock_picking_type_action">
-      <field name="context">{'group_by': ['warehouse_id']}</field>  
+      <field name="context">{'group_by':['warehouse_id']}</field>
+
     </record>
   </data>
 </openerp>

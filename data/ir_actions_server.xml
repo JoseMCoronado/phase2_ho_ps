@@ -7,6 +7,8 @@
 obj['x_acc_hold'] = True
 for picking in obj.picking_ids:
   picking['x_sc_notes'] = obj.x_sc_notes
+  picking['x_sales_request'] = obj.x_sales_request
+  picking['x_last_ship'] = obj.x_last_ship
   picking['x_dns'] = True
         ]]>
       </field>
@@ -192,5 +194,7 @@ else:
     <field name="state">email</field>
     <field name="template_id" ref="account.email_template_edi_invoice"/><!--NEED CHANGE WHEN LIVE-->
   </record>
+  <!--PHASE 1-->
+
 </data>
 </openerp>
