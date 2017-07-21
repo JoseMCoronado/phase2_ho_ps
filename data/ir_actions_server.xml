@@ -10,6 +10,8 @@ for picking in obj.picking_ids:
   picking['x_sales_request'] = obj.x_sales_request
   picking['x_last_ship'] = obj.x_last_ship
   picking['x_dns'] = True
+  if not obj.requested_date:
+    picking['min_date'] = False
         ]]>
       </field>
       <field name="crud_model_id" eval="False"/>
@@ -130,7 +132,7 @@ else:
     <field name="sequence">5</field>
     <field name="state">code</field>
   </record>
-  <record model="ir.actions.server" id="action_set_est_ship_date">
+  <!--<record model="ir.actions.server" id="action_set_est_ship_date">
     <field name="child_ids" eval="[(6, 0, [])]"/>
     <field name="code"><![CDATA[if obj.x_ship_date:
     obj['min_date']=obj.x_ship_date
@@ -143,7 +145,7 @@ else:
     <field name="name">[JOS] Set Est. Ship Date on Transfer</field>
     <field name="sequence">5</field>
     <field name="state">code</field>
-  </record>
+  </record>-->
   <!--ELEMENT 3.1-->
   <record model="ir.actions.server" id="action_send_exp_reminder">
     <field name="child_ids" eval="[(6, 0, [])]"/>

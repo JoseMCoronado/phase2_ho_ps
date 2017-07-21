@@ -166,7 +166,8 @@ for picking in obj.x_so_id.picking_ids:
     <record model="ir.actions.act_window" id="action_to_schedule_transfers">
       <field name="auto_search" eval="True"/>
       <field name="context">{}</field>
-      <field name="domain">[('state','not in',['done','cancel','draft']),('x_ship_date','=',False),('x_dns','!=',True)]</field>
+      <!--<field name="domain">[('state','not in',['done','cancel','draft']),('x_ship_date','=',False),('x_dns','!=',True)]</field>-->
+      <field name="domain">[('state','not in',['done','cancel','draft']),('min_date','=',False),('x_dns','!=',True)]</field>
       <field name="filter" eval="False"/>
       <field name="groups_id" eval="[(6, 0, [])]"/>
       <field name="help"><![CDATA[<p>
