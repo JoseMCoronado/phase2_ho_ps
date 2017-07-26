@@ -10,8 +10,10 @@ for picking in obj.picking_ids:
   picking['x_sales_request'] = obj.x_sales_request
   picking['x_last_ship'] = obj.x_last_ship
   picking['x_dns'] = True
+  picking['x_ship_date'] = obj.requested_date
   if not obj.requested_date:
-    picking['min_date'] = False
+    picking['min_date'] = '2050-12-31 00:00:00'
+
         ]]>
       </field>
       <field name="crud_model_id" eval="False"/>
@@ -121,7 +123,10 @@ else:
   </record>
   <record model="ir.actions.server" id="action_send_awaiting">
     <field name="child_ids" eval="[(6, 0, [])]"/>
-    <field name="code"><![CDATA[obj['x_state'] = 'awaiting'
+    <field name="code"><![CDATA[if obj.incoterm and obj.x_last_ship:
+      obj['x_state'] = 'awaiting'
+else:
+      raise Warning("You need to select a 'Delivery Method' or 'Last Ship Date' before submitting for approval.")
       ]]>
     </field>
     <field name="crud_model_id" eval="False"/>
@@ -132,7 +137,7 @@ else:
     <field name="sequence">5</field>
     <field name="state">code</field>
   </record>
-  <!--<record model="ir.actions.server" id="action_set_est_ship_date">
+  <record model="ir.actions.server" id="action_set_est_ship_date">
     <field name="child_ids" eval="[(6, 0, [])]"/>
     <field name="code"><![CDATA[if obj.x_ship_date:
     obj['min_date']=obj.x_ship_date
@@ -145,7 +150,7 @@ else:
     <field name="name">[JOS] Set Est. Ship Date on Transfer</field>
     <field name="sequence">5</field>
     <field name="state">code</field>
-  </record>-->
+  </record>
   <!--ELEMENT 3.1-->
   <record model="ir.actions.server" id="action_send_exp_reminder">
     <field name="child_ids" eval="[(6, 0, [])]"/>
@@ -169,7 +174,8 @@ else:
     <field name="name">[JOS] Send Est Ship Date Email</field>
     <field name="sequence">5</field>
     <field name="state">email</field>
-    <field name="template_id" ref="__export__.mail_template_62"/><!--NEED CHANGE WHEN LIVE-->
+    <field name="condition">object.state=='done'</field>
+    <field name="template_id" eval="False"/><!--NEED CHANGE WHEN LIVE-->
   </record>
   <!--ELEMENT 3.4-->
   <record model="ir.actions.server" id="action_send_thank_you_receipt">
@@ -182,7 +188,7 @@ else:
     <field name="sequence">5</field>
     <field name="state">email</field>
     <field name="condition">object.payment_type=='inbound' and object.partner_type=='customer'</field>
-    <field name="template_id" ref="__export__.mail_template_63"/><!--NEED CHANGE WHEN LIVE-->
+    <field name="template_id" eval="False"/><!--NEED CHANGE WHEN LIVE-->
   </record>
   <!--ELEMENT 3.5-->
   <record model="ir.actions.server" id="action_send_final_invoice">

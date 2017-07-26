@@ -8,5 +8,12 @@
       <field name="state">manual</field>
       <field name="transient" eval="True"/>
     </record>
+    <record model="ir.model" id="x_carrier">
+      <field name="info">Carrier Model</field>
+      <field name="model">x_carrier</field>
+      <field name="name">Carriers</field>
+      <field name="state">manual</field>
+      <field name="transient" eval="False"/>
+    </record>
   </data>
 </openerp>

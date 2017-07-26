@@ -11,12 +11,8 @@
           <xpath expr="//field[@name='note']" position="attributes">
             <attribute name="placeholder">Order Note...</attribute>
           </xpath>
-          <xpath expr="//notebook" position="inside">
-            <page string="Supply Chain Notes">
-                <group>
+          <xpath expr="//group[@name='sale_shipping']" position="inside">
                   <field name="x_sc_notes"/>
-                </group>
-            </page>
           </xpath>
           <!--ELEMENT 1.4-->
           <xpath expr="//div[@name='button_box']" position="inside">
@@ -69,14 +65,30 @@
           <xpath expr="//field[@name='requested_date']" position="replace"/>
           <xpath expr="//field[@name='confirmation_date']" position="after">
               <field name="requested_date" string="Est. Ship Date"/>
-              <field name="x_sales_request"/>
-              <field name="x_last_ship"/>
           </xpath>
           <!--ELEMENT 3.1-->
           <xpath expr="//field[@name='validity_date']" position="after">
             <field name="x_opt_out" string="Exp. Reminder Opt Out" attrs="{'invisible':[('state','in',['sale','done'])]}"/>
           </xpath>
-
+          <xpath expr="//field[@name='commitment_date']" position="before">
+            <field name="x_sales_request"/>
+            <field name="x_last_ship"/>
+          </xpath>
+          <xpath expr="//field[@name='commitment_date']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='effective_date']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='quote_viewed']/.." position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='fiscal_position_id']" position="attributes">
+            <attribute name="string">Tax Position</attribute>
+          </xpath>
+          <xpath expr="//group[@name='sales_person']/../.." position="attributes">
+            <attribute name="string">Order Details</attribute>
+          </xpath>
         </data>
       </field>
       <field name="priority">99</field>
@@ -145,18 +157,18 @@
           <field name="x_freight_booked"/>
         </xpath>
         <!--ELEMENT 3.3-->
-        <xpath expr="//div[@name='button_box']" position="inside">
+        <!--<xpath expr="//div[@name='button_box']" position="inside">
           <button type="action" name="%(action_send_est_ship_date_mail)d" class="oe_stat_button" icon="fa-envelope">
             <strong>SEND EST SHIP</strong>
           </button>
-        </xpath>
+        </xpath>-->
         <!--PHASE 1 ELEMENT-->
         <xpath expr="//field[@name='min_date']" position="before">
           <field name="x_sales_request" attrs="{'invisible': [('x_sales_request', '=', False)]}"/>
           <field name="x_internal_request" attrs="{'invisible': [('x_sales_request', '!=', False)]}"/>
           <field name="x_internal_last_ship" attrs="{'invisible': [('x_last_ship', '!=', False)]}"/>
           <field name="x_last_ship" attrs="{'invisible': [('x_last_ship', '=', False)]}"/>
-          <!--<field name="x_ship_date"/>-->
+          <field name="x_ship_date"/>
         </xpath>
         <xpath expr="//field[@name='min_date']" position="attributes">
           <attribute name="invisible">1</attribute>
@@ -165,7 +177,11 @@
         <xpath expr="//field[@name='origin']" position="after">
           <field name="priority"/>
         </xpath>
-
+        <xpath expr="//field[@name='group_id']" position="after">
+          <field name="x_carrier_id"/>
+          <field name="x_carrier_tracking"/>
+          <field name="x_carrier_tracking_link" widget="url" attrs="{'invisible':[('x_carrier_tracking','=',False)]}"/>  
+        </xpath>
       </field>
       <field name="priority">99</field>
     </record>
@@ -178,8 +194,8 @@
           <field name="x_dns"/>
         </xpath>
         <xpath expr="//field[@name='origin']" position="before">
-          <!--<field name="x_ship_date"/>-->
-          <field name="min_date"/>
+          <field name="x_ship_date"/>
+          <!--<field name="min_date"/>-->
         </xpath>
       </field>
       <field name="priority">99</field>
@@ -254,6 +270,17 @@
         </xpath>
         <xpath expr="//field[@name='date_order']" position="after">
           <field name="x_volume_total"/>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="so_tree_view_mod">
+      <field name="name">x_jos.sale.order.tree.mod</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_tree"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='commitment_date']" position="attributes">
+          <attribute name="invisible">1</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>
