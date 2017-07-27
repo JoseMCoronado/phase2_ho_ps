@@ -89,6 +89,9 @@
           <xpath expr="//group[@name='sales_person']/../.." position="attributes">
             <attribute name="string">Order Details</attribute>
           </xpath>
+          <xpath expr="//group[@name='sale_pay']//field[@name='invoice_status']" position="after">
+            <field name="x_purch_ready"/>
+          </xpath>
         </data>
       </field>
       <field name="priority">99</field>
@@ -180,7 +183,7 @@
         <xpath expr="//field[@name='group_id']" position="after">
           <field name="x_carrier_id"/>
           <field name="x_carrier_tracking"/>
-          <field name="x_carrier_tracking_link" widget="url" attrs="{'invisible':[('x_carrier_tracking','=',False)]}"/>  
+          <field name="x_carrier_tracking_link" widget="url" attrs="{'invisible':[('x_carrier_tracking','=',False)]}"/>
         </xpath>
       </field>
       <field name="priority">99</field>
