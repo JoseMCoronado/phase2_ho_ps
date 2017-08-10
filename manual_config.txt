@@ -1,0 +1,4 @@
+-Manually configure to ship all products at once.
+-All shipments marked as delivered do not apper on the "To Schedule" List
+-change the invoicing policy on delivered qty
+-run script to have all items change from ordered qty to delivered. 

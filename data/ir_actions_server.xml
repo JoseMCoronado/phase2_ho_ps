@@ -4,7 +4,7 @@
     <record model="ir.actions.server" id="action_transfer_so_notes">
       <field name="child_ids" eval="[(6, 0, [])]"/>
       <field name="code"><![CDATA[obj.action_confirm()
-obj['x_acc_hold'] = True
+
 for picking in obj.picking_ids:
   picking['x_sc_notes'] = obj.x_sc_notes
   picking['x_sales_request'] = obj.x_sales_request
@@ -125,6 +125,7 @@ else:
     <field name="child_ids" eval="[(6, 0, [])]"/>
     <field name="code"><![CDATA[if obj.incoterm and obj.x_last_ship:
       obj['x_state'] = 'awaiting'
+      obj['x_acc_hold'] = True
 else:
       raise Warning("You need to select a 'Delivery Method' or 'Last Ship Date' before submitting for approval.")
       ]]>

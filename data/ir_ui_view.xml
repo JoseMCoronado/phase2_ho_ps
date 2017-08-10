@@ -12,7 +12,7 @@
             <attribute name="placeholder">Order Note...</attribute>
           </xpath>
           <xpath expr="//group[@name='sale_shipping']" position="inside">
-                  <field name="x_sc_notes"/>
+                  <field name="x_sc_notes" placeholder="e.g. 6 flights of stairs, need 4 people, only 2 hour window..."/>
           </xpath>
           <!--ELEMENT 1.4-->
           <xpath expr="//div[@name='button_box']" position="inside">
@@ -49,7 +49,7 @@
           </xpath>
           <!--ELEMENT 1.2 & 1.6-->
           <xpath expr="//button[@name='action_confirm' and @states='sent']" position="before">
-              <button name="%(action_send_awaiting)d"  attrs="{'invisible': [('x_state', 'not in', ['sent'])]}" string="Confirm for Approval" class="btn-primary o_sale_confirm" type="action"/>
+              <button name="w"  attrs="{'invisible': [('x_state', 'not in', ['sent'])]}" string="Confirm for Approval" class="btn-primary o_sale_confirm" type="action"/>
               <button name="%(action_send_awaiting)d" attrs="{'invisible': [('x_state', 'not in', ['draft'])]}" string="Confirm for Approval" class="o_sale_confirm" type="action"/>
           </xpath>
           <xpath expr="//button[@name='action_confirm' and @states='sent']" position="attributes">
@@ -64,7 +64,7 @@
           </xpath>
           <xpath expr="//field[@name='requested_date']" position="replace"/>
           <xpath expr="//field[@name='confirmation_date']" position="after">
-              <field name="requested_date" string="Est. Ship Date"/>
+              <field name="requested_date" readonly="0" string="Est. Ship Date"/>
           </xpath>
           <!--ELEMENT 3.1-->
           <xpath expr="//field[@name='validity_date']" position="after">
@@ -84,12 +84,12 @@
             <attribute name="invisible">1</attribute>
           </xpath>
           <xpath expr="//field[@name='fiscal_position_id']" position="attributes">
-            <attribute name="string">Tax Position</attribute>
+            <attribute name="string">Tax Status</attribute>
           </xpath>
           <xpath expr="//group[@name='sales_person']/../.." position="attributes">
             <attribute name="string">Order Details</attribute>
           </xpath>
-          <xpath expr="//group[@name='sale_pay']//field[@name='invoice_status']" position="after">
+          <xpath expr="//field[@name='payment_term_id']/.." position="inside">
             <field name="x_purch_ready"/>
           </xpath>
         </data>
@@ -124,7 +124,7 @@
         <xpath expr="//notebook" position="inside">
           <page string="Supply Chain Notes">
               <group>
-                <field name="x_sc_notes"/>
+                <field name="x_sc_notes" placeholder="e.g. 6 flights of stairs, need 4 people, only 2 hour window..."/>
               </group>
           </page>
         </xpath>
@@ -138,7 +138,7 @@
       <field name="arch" type="xml">
         <xpath expr="//group[@class='hidden-xs']" position="after">
               <group>
-                <field name="x_sc_notes"/>
+                <field name="x_sc_notes" placeholder="e.g. 6 flights of stairs, need 4 people, only 2 hour window..."/>
               </group>
         </xpath>
         <!--ELEMENT 1.4-->
@@ -244,6 +244,7 @@
           <attribute name="string">Delivery Method</attribute>
           <attribute name="domain">[('x_display_so','=',True)]</attribute>
           <attribute name="invisible">0</attribute>
+          <attribute name="required">1</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>
@@ -284,6 +285,9 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='commitment_date']" position="attributes">
           <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//field[@name='requested_date']" position="attributes">
+          <attribute name="string">Est. Ship Date</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>
