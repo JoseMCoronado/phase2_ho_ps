@@ -21,7 +21,7 @@
                   <field string="Sales Hold" name="x_hold" invisible="1"/>
               </button>
               <button attrs="{'invisible': [('state', 'not in', ('sale'))]}" name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
-                  <strong>ACCOUNTING DNS</strong>
+                  <strong>ACCT DNS</strong>
                   <field string="Accounting Hold" name="x_acc_hold" invisible="1" />
               </button>
           </xpath>
@@ -64,15 +64,19 @@
           </xpath>
           <xpath expr="//field[@name='requested_date']" position="replace"/>
           <xpath expr="//field[@name='confirmation_date']" position="after">
-              <field name="requested_date" readonly="0" string="Est. Ship Date"/>
+              <field name="requested_date" attrs="{'readonly':[('x_check','=',False),('state','in',['sale','done','cancel'])]}" string="Est. Ship Date"/>
           </xpath>
           <!--ELEMENT 3.1-->
           <xpath expr="//field[@name='validity_date']" position="after">
             <field name="x_opt_out" string="Exp. Reminder Opt Out" attrs="{'invisible':[('state','in',['sale','done'])]}"/>
           </xpath>
           <xpath expr="//field[@name='commitment_date']" position="before">
-            <field name="x_sales_request"/>
-            <field name="x_last_ship"/>
+            <field name="x_check" invisible="1"/>
+            <field name="x_sales_request" attrs="{'readonly':[('x_check','=',False),('state','in',['sale','done','cancel'])]}"/>
+            <field name="x_last_ship" attrs="{'readonly':[('x_check','=',False),('state','in',['sale','done','cancel'])]}"/>
+          </xpath>
+          <xpath expr="//field[@name='picking_policy']" position="attributes">
+            <attribute name="invisible">1</attribute>
           </xpath>
           <xpath expr="//field[@name='commitment_date']" position="attributes">
             <attribute name="invisible">1</attribute>
@@ -178,6 +182,8 @@
         </xpath>
         <xpath expr="//field[@name='priority']" position="replace"/>
         <xpath expr="//field[@name='origin']" position="after">
+          <field name="sale_id" attrs="{'invisible': [('sale_id','=',False)]}"/>
+          <field name="purchase_id" attrs="{'invisible': [('purchase_id','=',False)]}"/>
           <field name="priority"/>
         </xpath>
         <xpath expr="//field[@name='group_id']" position="after">
@@ -288,6 +294,20 @@
         </xpath>
         <xpath expr="//field[@name='requested_date']" position="attributes">
           <attribute name="string">Est. Ship Date</attribute>
+        </xpath>
+        <xpath expr="//field[@name='invoice_status']" position="after">
+          <field name="x_inv_pay_status"/>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="stock_return_lines_mod">
+      <field name="name">x_jos.return.lines.mod</field>
+      <field name="model">stock.return.picking</field>
+      <field name="inherit_id" ref="stock.view_stock_return_picking_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='location_id']" position="attributes">
+          <attribute name="domain">[]</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>

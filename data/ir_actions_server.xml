@@ -203,7 +203,5 @@ else:
     <field name="state">email</field>
     <field name="template_id" ref="account.email_template_edi_invoice"/><!--NEED CHANGE WHEN LIVE-->
   </record>
-  <!--PHASE 1-->
-
 </data>
 </openerp>
