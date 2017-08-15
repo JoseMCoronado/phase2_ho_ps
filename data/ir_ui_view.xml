@@ -20,7 +20,7 @@
                   <strong>SALES DNS</strong>
                   <field string="Sales Hold" name="x_hold" invisible="1"/>
               </button>
-              <button attrs="{'invisible': [('state', 'not in', ('sale'))]}" name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
+              <button attrs="{'invisible': [('x_state', 'not in', ('awaiting','sale'))]}" name="%(action_acc_hold)d" type="action" groups="account.group_account_user" class="oe_stat_button" icon="fa-hand-paper-o">
                   <strong>ACCT DNS</strong>
                   <field string="Accounting Hold" name="x_acc_hold" invisible="1" />
               </button>

@@ -22,7 +22,7 @@
     <!--ELEMENT 3.1-->
     <record id="auto_send_exp_reminder" model="base.action.rule">
       <field name="name">[JOS] Send Quote Exp. Reminder</field>
-      <field name="active" eval="True"/>
+      <field name="active" eval="False"/>
       <field name="model_id" ref="sale_order_dates.model_sale_order"/>
       <field name="sequence" eval="2"/>
       <field name="kind">on_time</field>
@@ -34,7 +34,7 @@
     <!--ELEMENT 3.4-->
     <record id="auto_send_payment_thankyou" model="base.action.rule">
       <field name="name">[JOS] Send Thank You Receipt of Payment</field>
-      <field name="active" eval="True"/>
+      <field name="active" eval="False"/>
       <field name="model_id" ref="account.model_account_payment"/>
       <field name="sequence" eval="2"/>
       <field name="kind">on_create</field>
@@ -43,7 +43,7 @@
     <!--PHASE 1-->
     <record id="auto_send_est_ship_date_email" model="base.action.rule">
       <field name="name">[JOS] Send Est. Ship Date Email</field>
-      <field name="active" eval="True"/>
+      <field name="active" eval="False"/>
       <field name="model_id" ref="stock.model_stock_picking"/>
       <field name="sequence" eval="2"/>
       <field name="kind">on_write</field>
