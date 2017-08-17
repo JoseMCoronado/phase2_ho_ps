@@ -430,7 +430,7 @@
       <field name="copy" eval="False"/>
       <field name="depends" eval="False"/>
       <field name="domain">[]</field>
-      <field name="field_description">Cust. Req. Ship Date</field>
+      <field name="field_description">Cust. Man. Ship Date</field>
       <field name="groups" eval="[(6, 0, [])]"/>
       <field name="help" eval="False"/>
       <field name="index" eval="False"/>
@@ -568,7 +568,7 @@
         <field name="copy" eval="False"/>
         <field name="depends">origin</field>
         <field name="domain">[]</field>
-        <field name="field_description">Sales Request</field>
+        <field name="field_description">Customer Mandated</field>
         <field name="groups" eval="[(6, 0, [])]"/>
         <field name="help" eval="False"/>
         <field name="index" eval="False"/>
@@ -936,6 +936,27 @@
       <field name="store" eval="False"/>
       <field name="translate" eval="False"/>
       <field name="ttype">boolean</field>
+    </record>
+    <record model="ir.model.fields" id="x_product_type">
+      <field name="domain">[]</field>
+      <field name="field_description">Product Type</field>
+      <field name="groups" eval="[(6, 0, [])]"/>
+      <field name="model">sale.order.line</field>
+      <field name="model_id" ref="sale_order_dates.model_sale_order_line"/>
+      <field name="name">x_product_type</field>
+      <field name="on_delete">set null</field>
+      <field name="readonly" eval="True"/>
+      <field name="related">product_id.product_tmpl_id.type</field>
+      <field name="relation" eval="False"/>
+      <field name="relation_field" eval="False"/>
+      <field name="required" eval="False"/>
+      <field name="selectable" eval="True"/>
+      <field name="selection">[['consu', 'Consumable'], ['service', 'Service'], ['product', 'Stockable Product']]</field>
+      <field name="size" eval="False"/>
+      <field name="state">manual</field>
+      <field name="store" eval="True"/>
+      <field name="translate" eval="False"/>
+      <field name="ttype">selection</field>
     </record>
   </data>
 </openerp>

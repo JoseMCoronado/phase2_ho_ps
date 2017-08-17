@@ -1,6 +1,3 @@
--Manually configure to ship all products at once.
+
+-all open orders should have accounting DNS
 -All shipments marked as delivered do not appear on the "To Schedule" List
--change the invoicing policy on delivered qty
--run script to have all items change from ordered qty to delivered.
--make operations a non technical menu item
--make sure Down Payment Product is not on delivered qty

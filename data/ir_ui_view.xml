@@ -96,6 +96,18 @@
           <xpath expr="//field[@name='payment_term_id']/.." position="inside">
             <field name="x_purch_ready"/>
           </xpath>
+          <xpath expr="//field[@name='order_line']/tree//field[@name='route_id']" position="before">
+            <field name="x_product_type" invisible="1"/>
+          </xpath>
+          <xpath expr="//field[@name='order_line']/tree//field[@name='route_id']" position="attributes">
+            <attribute name="attrs">{'required':[('x_product_type','not in', ['service'])]}</attribute>
+          </xpath>
+          <xpath expr="//field[@name='order_line']/form//field[@name='route_id']" position="before">
+            <field name="x_product_type" invisible="1"/>
+          </xpath>
+          <xpath expr="//field[@name='order_line']/form//field[@name='route_id']" position="attributes">
+            <attribute name="attrs">{'required':[('x_product_type','not in', ['service'])]}</attribute>
+          </xpath>
         </data>
       </field>
       <field name="priority">99</field>
@@ -308,6 +320,17 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='location_id']" position="attributes">
           <attribute name="domain">[]</attribute>
+        </xpath>
+      </field>
+      <field name="priority">99</field>
+    </record>
+    <record model="ir.ui.view" id="partner_fiscal_name">
+      <field name="name">x_jos.res.partner.form.mod2</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='property_account_position_id']" position="attributes">
+          <attribute name="string">Tax Status</attribute>
         </xpath>
       </field>
       <field name="priority">99</field>

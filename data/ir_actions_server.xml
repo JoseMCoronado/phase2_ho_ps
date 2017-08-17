@@ -33,7 +33,7 @@ for picking in obj.picking_ids:
       <field name="name">[JOS] Send SO Confirmation Email</field>
       <field name="sequence">5</field>
       <field name="state">email</field>
-      <field name="template_id" ref="sale.email_template_edi_sale"/> <!--NEED CHANGE WHEN LIVE-->
+      <field name="template_id" eval="False"/> <!--NEED CHANGE WHEN LIVE-->
     </record>
     <record model="ir.actions.server" id="action_so_confirmation_multi">
       <field name="child_ids" eval="[(6, 0, [ref('action_send_so_confirmation_email'),ref('action_transfer_so_notes')])]"/>
@@ -163,7 +163,7 @@ else:
     <field name="sequence">5</field>
     <field name="state">email</field>
     <field name="condition">object.x_opt_out!=True</field>
-    <field name="template_id" ref="False"/> <!--NEED CHANGE WHEN LIVE-->
+    <field name="template_id" eval="False"/> <!--NEED CHANGE WHEN LIVE-->
   </record>
   <!--ELEMENT 3.3-->
   <record model="ir.actions.server" id="action_send_est_ship_date_mail">
